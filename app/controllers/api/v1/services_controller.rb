@@ -9,7 +9,7 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
             renderOpts[:status] = 200
             if service.nil?
                 service = {error: "no services in this organization matched your query"} 
-                renderOpts[:status] = 400
+                renderOpts[:status] = 404
             end
         rescue StandardError => e 
             service = {error: "sorry, there was a problem: #{e}" }
