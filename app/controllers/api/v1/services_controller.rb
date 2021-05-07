@@ -7,6 +7,10 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
         begin
             service = get_first_matching_service(query)
             renderOpts[:status] = 200
+            if service.nil?
+                service = {error: "no services in this organization matched your query"} 
+                renderOpts[:status] = 400
+            end
         rescue StandardError => e 
             service = {error: "sorry, there was a problem: #{e}" }
             renderOpts[:status] = 503
