@@ -17,6 +17,8 @@ jobs:
 
       - name: Run tests
         run: bin/rails t
+        env:
+          PD_TOKEN: ${{ secrets.PD_TOKEN }}
   deploy:
     name: deploy
     needs: tests

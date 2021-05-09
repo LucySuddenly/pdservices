@@ -9,18 +9,18 @@ class PdClientTest < ActiveSupport::TestCase
     stub = HTTParty::Response.new(req, res, parsed)
 
     test "#get_with_retries" do 
-        WebClient.stubs(:get).with("services", {timeout: 2}).returns(stub)
+        WebClient.stubs(:get).with("/services", {timeout: 2}).returns(stub)
     
-        resp = get_with_retries("services")
+        resp = get_with_retries("/services")
 
         # assert pass-thru
         assert resp[:services][1][:name] == lucyObj[:name]
     end
 
     test "#get_with_retries retries on error" do 
-        WebClient.stubs(:get).with("services", {timeout: 2}).returns(StandardError).times(3)
+        WebClient.stubs(:get).with("/services", {timeout: 2}).returns(StandardError).times(3)
         begin
-        list = get_with_retries("services")
+        list = get_with_retries("/services")
         rescue StandardError
             assert_nil(list)
         end
