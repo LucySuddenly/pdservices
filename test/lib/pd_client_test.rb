@@ -9,7 +9,7 @@ class PdClientTest < ActiveSupport::TestCase
     stub = HTTParty::Response.new(req, res, parsed)
 
     test "#get_with_retries" do 
-        WebClient.stubs(:get).with("/services", {timeout: 2}).returns(stub)
+        WebClient.stubs(:get).with("/services", {timeout: 2}).returns(stub).once
     
         resp = get_with_retries("/services")
 
@@ -28,7 +28,7 @@ class PdClientTest < ActiveSupport::TestCase
     end
 
     test "#get_first_matching_service" do 
-        WebClient.stubs(:get).with("/services", {:query => "query=Lucy", timeout: 2}).returns(stub)
+        WebClient.stubs(:get).with("/services", {:query => "query=Lucy", timeout: 2}).returns(stub).once
 
         service = get_first_matching_service("Lucy")
         # assert pass-thru and sort

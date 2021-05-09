@@ -9,4 +9,4 @@ https://lucuypdservices.herokuapp.com/api/v1
 ### Routes
 
 `/services/:name`
-- returns exact matches or the smallest lexicographical substring match
+- returns exact match or smallest lexicographical substring
