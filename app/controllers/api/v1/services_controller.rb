@@ -2,8 +2,6 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
     include PdClient
     def show 
         query = params[:id]
-        # only alphanumeric plz
-        query.delete!("^a-zA-Z0-9")
         service = nil
         renderOpts = {}
 

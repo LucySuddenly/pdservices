@@ -31,7 +31,7 @@ module PdClient
             # add more rubust resp code handling and configurable timeout duration
 
             WebClient.get(path, options.merge(timeout: 2)).parsed_response.with_indifferent_access
-        rescue HTTParty::Error, StandardError => e
+        rescue HTTParty::Error, HTTParty::ResponseError, StandardError => e
             # make configurable
             if attempts < 3 
                 # log or expo backoff would be better

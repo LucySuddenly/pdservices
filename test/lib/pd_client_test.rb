@@ -18,11 +18,12 @@ class PdClientTest < ActiveSupport::TestCase
     end
 
     test "#get_with_retries retries on error" do 
-        WebClient.stubs(:get).with("/services", {timeout: 2}).returns(StandardError).times(3)
+        WebClient.stubs(:get).with("/services", {timeout: 2}).raises(HTTParty::ResponseError.new(503)).times(3)
         begin
-        list = get_with_retries("/services")
-        rescue StandardError
-            assert_nil(list)
+            resp = get_with_retries("/services")
+        rescue StandardError => e
+            assert e.message.to_i == 503 
+            assert_nil(resp)
         end
     end
 

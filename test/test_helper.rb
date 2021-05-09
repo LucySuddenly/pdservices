@@ -19,7 +19,20 @@ class ActiveSupport::TestCase
     def to_hash
       @body
     end
+    
+    def parsed_response
+      @body
+    end
   end
+
+  # class ReturnSwitch
+  #   def initialize(collection)
+  #     raise StandardError.new("ReturnSwitch requires a collection") if collection == nil
+  #     @collection = collection
+  #   end
+
+  #   def 
+  # end
 
   # Add more helper methods to be used by all tests here...
 end
