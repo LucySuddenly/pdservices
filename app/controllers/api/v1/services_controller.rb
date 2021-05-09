@@ -13,7 +13,7 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
                 renderOpts[:status] = 404
             end
         rescue StandardError => e 
-            service = {error: "sorry, there was a problem: #{e}" }
+            service = {error: "sadface, bogus things happened somewhere in our machinery" }
             renderOpts[:status] = 503
         end
         render renderOpts.merge({json: service})
