@@ -10,7 +10,7 @@ class Api::V1::ServicesControllerTest < ActionDispatch::IntegrationTest
     assert status == 404
   end
   test "#show returns 503" do 
-    PdClient::WebClient.stubs(:get).with("/services", {query: "query=literally anything", timeout: 2}).returns(HTTParty::ResponseError.new(503)).times(3)
+    PdClient::WebClient.stubs(:get).with("/services", {query: "query=literally anything", timeout: 2}).raises(HTTParty::ResponseError.new(503)).times(3)
     status = get api_v1_service_path("literally anything")
     assert status == 503
   end
